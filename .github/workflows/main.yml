@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Synchro FTP/FTPS
+      - name: Synchro FTP/FTPS (dry-run)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server:                ${{ secrets.SFTP_HOST }}
@@ -21,6 +21,7 @@ jobs:
           password:              ${{ secrets.SFTP_PASSWORD }}
           protocol:              ftp
           port:                  21
-          local-dir:             ./
-          server-dir:            ./
-          dangerous-clean-slate: true
+          local-dir:             site/             # votre dossier de site
+          server-dir:            public_html/      # ou ./ si public_html est votre racine FTP
+          dangerous-clean-slate: false             # pas de purge complète
+          dry-run:               true              # simule seulement
