@@ -1,30 +1,26 @@
 # .github/workflows/deploy.yml
 name: Déploiement sur o2switch
 
-# 1. Déclenchement à chaque push sur main
 on:
   push:
     branches: [ main ]
 
 jobs:
   deploy:
-    # 2. Environnement Ubuntu
     runs-on: ubuntu-latest
 
     steps:
-      # 3. Récupère votre code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 4. Déploie via l’Action officielle FTP‑Deploy‑Action
-      - name: Déployer via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      - name: Synchro FTP/FTPS
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
         with:
-          server: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          password: ${{ secrets.SFTP_PASSWORD }}
-          protocol: sftp        # ou 'ftp' si vous préférez
-          port: 22              # port SFTP par défaut
-          local-dir: ./         # dossier local à envoyer
-          remote-dir: /vocte.com
-          delete: true          # supprime les fichiers distants obsolètes
+          server:                 ${{ secrets.SFTP_HOST }}
+          username:               ${{ secrets.SFTP_USERNAME }}
+          password:               ${{ secrets.SFTP_PASSWORD }}
+          protocol:               ftp               # ou 'ftps' si votre hébergeur supporte FTPS
+          port:                   21                # ou port FTPS (généralement 21 ou 990)
+          local-dir:              ./                # dossier local à envoyer
+          server-dir:             public_html/      # dossier cible côté serveur
+          dangerous-clean-slate:  true              # supprime les fichiers distants obsolètes
