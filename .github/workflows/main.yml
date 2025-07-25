@@ -1,4 +1,4 @@
-# .github/workflows/deploy.yml
+# .github/workflows/main.yml
 name: Déploiement sur o2switch
 
 on:
@@ -14,13 +14,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Synchro FTP/FTPS
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server:                 ${{ secrets.SFTP_HOST }}
-          username:               ${{ secrets.SFTP_USERNAME }}
-          password:               ${{ secrets.SFTP_PASSWORD }}
-          protocol:               ftp               # ou 'ftps' si votre hébergeur supporte FTPS
-          port:                   21                # ou port FTPS (généralement 21 ou 990)
-          local-dir:              ./                # dossier local à envoyer
-          server-dir:             public_html/      # dossier cible côté serveur
-          dangerous-clean-slate:  true              # supprime les fichiers distants obsolètes
+          server:                ${{ secrets.SFTP_HOST }}
+          username:              ${{ secrets.SFTP_USERNAME }}
+          password:              ${{ secrets.SFTP_PASSWORD }}
+          protocol:              ftp
+          port:                  21
+          local-dir:             ./
+          server-dir:            public_html/
+          dangerous-clean-slate: true
