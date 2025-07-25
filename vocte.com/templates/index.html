@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>PNG → WebP (lossless)</title>
+  <style>body{font-family:sans-serif;margin:2rem;}#drop-area{border:2px dashed #ccc;padding:1rem;text-align:center;}#progress{margin-top:1rem;}a{display:block;margin-top:0.5rem;}</style>
+</head>
+<body>
+  <h1>PNG → WebP (lossless)</h1>
+  <div id="drop-area">
+    <p>Glisse tes PNG ici ou</p>
+    <input type="file" id="pngfile" name="pngfile" accept="image/png" multiple>
+  </div>
+  <button id="convertBtn">Convertir</button>
+  <div id="progress" style="display:none;">Conversion en cours…</div>
+  <div id="downloadLink"></div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
