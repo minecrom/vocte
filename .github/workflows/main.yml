@@ -22,5 +22,5 @@ jobs:
           protocol:              ftp
           port:                  21
           local-dir:             ./
-          server-dir:            public_html/
+          server-dir:            vocte.com/
           dangerous-clean-slate: true
