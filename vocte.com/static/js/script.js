@@ -1,5 +1,34 @@
 const btn = document.getElementById('convertBtn');
 const input = document.getElementById('pngfile');
+// ––––– Drag & Drop Setup –––––
+const dropArea = document.getElementById('drop-area');
+
+// Empêche l’ouverture du fichier par défaut
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, e => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+});
+
+// Feedback visuel au survol
+['dragenter', 'dragover'].forEach(eventName => {
+  dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'));
+});
+['dragleave', 'drop'].forEach(eventName => {
+  dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'));
+});
+
+// Au lâcher, on récupère les PNG et on les injecte dans l’input
+dropArea.addEventListener('drop', e => {
+  const files = Array.from(e.dataTransfer.files)
+    .filter(file => file.type === 'image/png');
+  if (files.length) {
+    const dt = new DataTransfer();
+    files.forEach(file => dt.items.add(file));
+    input.files = dt.files;
+  }
+});
 const progress = document.getElementById('progress');
 const downloadLinkDiv = document.getElementById('downloadLink');
 
